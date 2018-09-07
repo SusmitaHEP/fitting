@@ -64,12 +64,12 @@ void fitSignalBkg(){
     PrunedMassT5HH1300Sig->Sumw2(kTRUE);
     PrunedMassT5HH1700Sig->Sumw2(kTRUE);
    
-    ZJetsTree->Draw("PrunedMass1>>PrunedMassZBkg", "(MET>1000 && MET<1200 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    WJetsTree->Draw("PrunedMass1>>PrunedMassWBkg", "(MET>1000 && MET<1200 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    TTBarTTree->Draw("PrunedMass1>>PrunedMassTTBarBkg","(MET>1000 && MET<1200 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    QCDTree->Draw("PrunedMass1>>PrunedMassQCDBkg", "(MET>1000 && MET<1200 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    T5HH1300Tree->Draw("PrunedMass1>>PrunedMassT5HH1300Sig", "(MET>1000 && MET<1200 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    T5HH1700Tree->Draw("PrunedMass1>>PrunedMassT5HH1700Sig", "(MET>1000 && MET<1200 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
+    ZJetsTree->Draw("PrunedMass1>>PrunedMassZBkg", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<200 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
+    WJetsTree->Draw("PrunedMass1>>PrunedMassWBkg", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<200 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
+    TTBarTTree->Draw("PrunedMass1>>PrunedMassTTBarBkg","(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<200 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
+    QCDTree->Draw("PrunedMass1>>PrunedMassQCDBkg", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<200 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
+    T5HH1300Tree->Draw("PrunedMass1>>PrunedMassT5HH1300Sig", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<200 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
+    T5HH1700Tree->Draw("PrunedMass1>>PrunedMassT5HH1700Sig", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<200 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
     
     
     THStack*hstack=new THStack("hstack","");
@@ -98,13 +98,13 @@ void fitSignalBkg(){
     TH1D*TotalBkg=(TH1D*)hstack->GetStack()->Last();
     
     //cout<<">>>>>>>>>>>>>>>>QCD>>>>>>>>>>>>>>>>"<<PrunedMassQCDBkg->Integral()<<endl;
-    cout<<"Z+Jets==>"<<PrunedMassZBkg->Integral()<<endl;
-    cout<<"W+tttJets==>"<<PrunedMassWBkg->Integral()+PrunedMassTTBarBkg->Integral()<<endl;
+    //cout<<"Z+Jets==>"<<PrunedMassZBkg->Integral()<<endl;
+    //cout<<"W+tttJets==>"<<PrunedMassWBkg->Integral()+PrunedMassTTBarBkg->Integral()<<endl;
     //cout<<""<<PrunedMassZBkg->Integral()<<endl;
     //cout<<""<<PrunedMassT5HH1300Sig->Integral()<<endl;
     //cout<<""<<PrunedMassT5HH1700Sig->Integral()<<endl;
     
- /*   
+    
     Int_t nbins = TotalBkg->GetSize();
     double_t bgerror1 = 0.; 
     for (Int_t i=1;i<nbins+1;i++) { 
@@ -115,31 +115,30 @@ void fitSignalBkg(){
     cout<<"MET>1200######"<<TotalBkg->Integral()<<endl;
     cout<<"Error################*********"<<bgerror1<<endl;
 
-   
-    
+       
     TCanvas *c= new TCanvas("c","c",600,600) ;
     hstack->Draw("hist"); 
     PrunedMassT5HH1700Sig->Draw("hist same"); //PrunedMassT5HH1300Sig->Draw("hist same"); 
     leg->Draw();
-    c->SaveAs("histo.png");
+    //c->SaveAs("histo.png");
 
-    ZJetsTree->Draw("MET>>METZBkg", "(MET>450 && MET<600 &&HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    WJetsTree->Draw("MET>>METWBkg", "(MET>450 && MET<600 &&HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    TTBarTTree->Draw("MET>>METTTBarBkg","(MET>450 && MET<600 &&HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    QCDTree->Draw("MET>>METQCDBkg", "(MET>450 && MET<600 &&HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    T5HH1300Tree->Draw("MET>>METT5HH1300Sig", "(MET>450 && MET<600 &&HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
-    T5HH1700Tree->Draw("MET>>METT5HH1700Sig", "(MET>450 && MET<600 &&HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>70 && PrunedMass1<100 && PrunedMass2>70 && PrunedMass2<100)*Evtweight*(80/35.9)");
+//  ZJetsTree->Draw("MET>>METZBkg", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<70 && PrunedMass2>50 && PrunedMass2<200)*Evtweight*(80/35.9)");
+//    WJetsTree->Draw("MET>>METWBkg", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<70 && PrunedMass2>50 && PrunedMass2<200)*Evtweight*(80/35.9)");
+//    TTBarTTree->Draw("MET>>METTTBarBkg","(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<70 && PrunedMass2>50 && PrunedMass2<200)*Evtweight*(80/35.9)");
+//    QCDTree->Draw("MET>>METQCDBkg", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<70 && PrunedMass2>50 && PrunedMass2<200)*Evtweight*(80/35.9)");
+//    T5HH1300Tree->Draw("MET>>METT5HH1300Sig", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<70 && PrunedMass2>50 && PrunedMass2<200)*Evtweight*(80/35.9)");
+//    T5HH1700Tree->Draw("MET>>METT5HH1700Sig", "(MET>300 && HT>600 && JetPt1>400 && JetPt2>200 && PrunedMass1>50 && PrunedMass1<70 && PrunedMass2>50 && PrunedMass2<200)*Evtweight*(80/35.9)");
    
     
-    THStack*hstack2=new THStack("hstack2","");
-    
+//    THStack*hstack2=new THStack("hstack2","");
+/*    
      
-    //METQCDBkg->SetFillColor(kMagenta+1);
-    //METWBkg->SetFillColor(kBlue+1);
+    METQCDBkg->SetFillColor(kMagenta+1);
+    METWBkg->SetFillColor(kBlue+1);
     METZBkg->SetFillColor(kGreen+1);
-    //METTTBarBkg->SetFillColor(kCyan+1);
-    //METT5HH1300Sig->SetLineColor(kBlack+1);
-    //METT5HH1700Sig->SetLineColor(kBlack+1);
+    METTTBarBkg->SetFillColor(kCyan+1);
+    METT5HH1300Sig->SetLineColor(kBlack+1);
+    METT5HH1700Sig->SetLineColor(kBlack+1);
     
 
     leg=new TLegend(0.5488722,0.6825806,0.914787,0.8748387,NULL,"brNDC");
@@ -157,26 +156,27 @@ void fitSignalBkg(){
     TH1D*TotalBkgMETShapeB=(TH1D*)hstack2->GetStack()->Last();
     
     cout<<"Total Integral****************************************"<<TotalBkgMETShapeB->Integral()<<endl;
-
+*/
    
     RooRealVar jetMass("jetMass","Pruned Jet Mass [GeV]",30.,50.,200.);
 
-    RooRealVar *METBins= new RooRealVar("METBins","MET [GeV]",30.,300.,1500.);
+//    RooRealVar *METBins= new RooRealVar("METBins","MET [GeV]",30.,300.,1500.);
     jetMass.setRange("Signal",70., 100.);
     jetMass.setRange("Sideband1",50., 70.);
     jetMass.setRange("Sideband2",100., 200.);
-    jetMass.setRange("Sideband3",100., 160.);
+    /*jetMass.setRange("Sideband3",100., 160.);*/
     
-
+/*
     METBins->setRange("METBin1", 300., 450.);
     METBins->setRange("METBin2", 450., 600.);
     METBins->setRange("METBin3", 600., 800.);
     METBins->setRange("METBin4", 800., 1000.);
     METBins->setRange("METBin5", 1000, 1200.);
     METBins->setRange("METBin6", 1200, 1500.);
-        
+*/        
     RooDataHist MC_bkg("MC_bkg","MC_bkg",jetMass,Import(*TotalBkg));
-    
+    RooDataHist MC_sig("MC_sig","MC_sig",jetMass,Import(*PrunedMassT5HH1300Sig));
+
     RooRealVar a1("a1","a1",0.0,-100.0,100.0);
     RooRealVar a2("a2","a2",0.0,-100.0,100.0);
     //RooRealVar a3("a3","a3",0.0,-100.0,100.0);
@@ -189,7 +189,7 @@ void fitSignalBkg(){
         
     //RooPlot* frame = jetMass.frame(Title("polynomial fit"));
     //poly.fitTo(MC_bkg);
-    RooFitResult* r =  poly.fitTo(MC_bkg, Range("Sideband1,Sideband2"),Save());
+    RooFitResult *r =  poly.fitTo(MC_bkg, Range("Sideband1,Sideband2"),Save());
     //integral of mass in signal region:
     RooAbsReal*BkginSR=poly.createIntegral(jetMass, NormSet(jetMass), Range("Signal"));
        
@@ -204,25 +204,25 @@ void fitSignalBkg(){
     poly.paramOn(frame);
     
 
-new TCanvas("rf208_convolution2","rf208_convolution2",600,600) ;
+new TCanvas("massfitting","massfitting",600,600) ;
     gPad->SetLeftMargin(0.15) ; frame->GetYaxis()->SetTitle("Events"); frame->GetXaxis()->SetTitle("pruned Mass"); hstack->Draw("hist"); 
     frame->Draw("hist same"); PrunedMassT5HH1700Sig->Draw("hist same"); leg->Draw();
 
     
     // Draw frame on canvas
     
-     RooDataHist* MC_bkgMETShapeB = new RooDataHist("MC_bkgMETShapeB","MC_bkgMETShape",RooArgList(*METBins),TotalBkgMETShapeB);
-     cout << "************************************ Bkg Integral********************************************************* "<< BkginSR->getVal()*TotalBkg->Integral() << endl ;
-     RooRealVar alphaMET("alphaMET", "exponentialMET", 0, -1., 0.1);
-     RooExponential expMETB("expMET", "", *METBins, alphaMET);
-     RooFitResult*r3=expMETB.fitTo(*MC_bkgMETShapeB, Save());
-     RooAbsReal*METBin1SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin1"));
-     RooAbsReal*METBin2SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin2"));
-     RooAbsReal*METBin3SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin3"));
-     RooAbsReal*METBin4SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin4"));
-     RooAbsReal*METBin5SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin5"));
-     RooAbsReal*METBin6SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin6"));
-     
+     //RooDataHist* MC_bkgMETShapeB = new RooDataHist("MC_bkgMETShapeB","MC_bkgMETShape",RooArgList(*METBins),TotalBkgMETShapeB);
+cout << "************************************ Bkg Integral********************************************************* "<< BkginSR->getVal()*TotalBkg->Integral() << endl ;
+     //RooRealVar alphaMET("alphaMET", "exponentialMET", 0, -1., 0.1);
+     //RooExponential expMETB("expMET", "", *METBins, alphaMET);
+     //RooFitResult*r3=expMETB.fitTo(*MC_bkgMETShapeB, Save());
+     //RooAbsReal*METBin1SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin1"));
+     //RooAbsReal*METBin2SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin2"));
+     //RooAbsReal*METBin3SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin3"));
+     //RooAbsReal*METBin4SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin4"));
+     //RooAbsReal*METBin5SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin5"));
+     //RooAbsReal*METBin6SRB=expMETB.createIntegral(*METBins, NormSet(*METBins), Range("METBin6"));
+/*     
      std::cout<<"MET Bin Fractions "<<METBin1SRB->getVal()<<", "<<METBin2SRB->getVal()<<", "<<METBin3SRB->getVal()<<", "<<METBin4SRB->getVal()<<", "<<METBin5SRB->getVal()<<", "<<METBin6SRB->getVal()<<std::endl;
      std::cout<<"MET Bin Bkg Predictions "<<METBin1SRB->getVal()*BkginSR->getVal()*TotalBkg->Integral() <<", "<<METBin2SRB->getVal()*BkginSR->getVal()*TotalBkg->Integral() <<", "<<METBin3SRB->getVal()*BkginSR->getVal()*TotalBkg->Integral() <<", "<<METBin4SRB->getVal()*BkginSR->getVal()*TotalBkg->Integral()<<METBin5SRB->getVal()*BkginSR->getVal()*TotalBkg->Integral() <<", "<<METBin6SRB->getVal()*BkginSR->getVal()*TotalBkg->Integral() <<std::endl;
      
@@ -235,6 +235,6 @@ new TCanvas("rf208_convolution2","rf208_convolution2",600,600) ;
 new TCanvas("rf208_convolution","rf208_convolution",600,600) ;
     gPad->SetLeftMargin(0.15) ; frame2->GetYaxis()->SetTitle("Events"); frame2->GetXaxis()->SetTitle("MET"); hstack2->Draw("hist"); 
     frame2->Draw("hist same"); METT5HH1700Sig->Draw("hist same"); leg->Draw();
+*/
 
-*/  
 }
